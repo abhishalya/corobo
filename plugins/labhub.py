@@ -108,10 +108,6 @@ class LabHub(DefaultConfigMixin, BotPlugin):
         teams = self.team_mapping()
         return teams[team].is_member(user)
 
-    @staticmethod
-    def is_room_member(invitee, msg):
-        return invitee in msg.frm.room.occupants
-
     # Ignore LineLengthBear, PycodestyleBear
     @re_botcmd(pattern=r'^(?:(?:welcome)|(?:inv)|(?:invite))\s+@?([\w-]+)(?:\s+(?:to)\s+(\w+))?$',
                re_cmd_name_help='invite ([@]<username> [to <team>]|me)')
@@ -142,10 +138,6 @@ class LabHub(DefaultConfigMixin, BotPlugin):
 
         def invite(invitee, team):
             self.team_mapping()[team].invite(invitee)
-
-        if not self.is_room_member(invitee, msg):
-            yield '@{} is not a member of this room.'.format(invitee)
-            return
 
         if is_maintainer:
             invite(invitee, team)
@@ -192,6 +184,26 @@ class LabHub(DefaultConfigMixin, BotPlugin):
                 )
                 self.send(msg.frm, response)
                 self.hello_world_users.add(user)
+
+        mentioned = []
+        room_members = msg.frm.room.occupants
+        words = msg.body.split()
+        for word in words:
+            if word.startswith('@'):
+                mentioned.append(word[1:])
+
+        warn = False
+        for mention in mentioned:
+            is_member = False
+            for room_member in room_members:
+                if room_member.username == mention:
+                    is_member = True
+            if not is_member:
+                warn = True
+
+        if warn:
+            self.send(msg.frm, 'WARNING: Someone mentioned is '
+                      'not a member of this room.')
 
     @re_botcmd(pattern=r'(?:new|file) issue ([\w\-\.]+?)(?: |\n)(.+?)(?:$|\n((?:.|\n)*))',  # Ignore LineLengthBear, PyCodeStyleBear
                re_cmd_name_help='new issue repo-name title\n[description]',
