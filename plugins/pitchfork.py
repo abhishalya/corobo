@@ -25,7 +25,7 @@ class Pitchfork(BotPlugin):
                     @$user, you are being pitchforked down to $place
                     ```
                                                           .+====----->
-                                                           \('
+                                                           \\('
                     =====================================<%{%{%{>>+===---> $user
                                                            /(,
                                                           .+====----->
