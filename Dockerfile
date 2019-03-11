@@ -4,10 +4,8 @@ ENV BOT_ROOT=/opt/errbot
 
 ADD requirements.txt $BOT_ROOT/requirements.txt
 
-RUN apk add --no-cache libffi openssl git \
+RUN apk add --no-cache libffi openssl git gcc libxml2-dev libxslt-dev libc-dev \
     && apk add --no-cache --virtual .build-deps \
-           gcc \
-           libc-dev \
            libffi-dev \
            openssl-dev \
     && pip install -r $BOT_ROOT/requirements.txt \

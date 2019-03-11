@@ -16,9 +16,7 @@ addons:
 
 before_install:
   - cp requirements.txt requirements.orig
-  - printf '%s\n%s\n%s\n%s\n'
-           "git+https://github.com/coala/coala"
-           "git+https://github.com/coala/coala-bears"
+  - printf '%s\n%s\n'
            "$(cat test-requirements.txt)"
            "$(cat requirements.txt)"
            > requirements.txt
