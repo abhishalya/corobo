@@ -59,7 +59,7 @@ if not os.path.isdir(BOT_DATA_DIR):
     # create an empty data directory
     os.mkdir(BOT_DATA_DIR)
 
-BOT_EXTRA_PLUGIN_DIR = BOT_ROOT
+BOT_EXTRA_PLUGIN_DIR = os.path.join(BOT_ROOT, 'temp_plugins')
 
 BOT_LOG_FILE = os.path.join(BOT_ROOT, 'errbot.log')
 BOT_LOG_LEVEL = logging.DEBUG
@@ -97,31 +97,31 @@ ROOMS_TO_JOIN = [
     'coala',
     'coala-bears',
     'corobo',
-    'depman',
-    'ast',
-    'gci',
+    # 'depman',
+    # 'ast',
+    # 'gci',
 ]
 
 if BACKEND == 'Gitter':
     ROOMS_TO_JOIN += [
-        'aspects',
-        'bearship',
-        'coala',
-        'coala/artwork-corner',
-        'coala/gsoc',
-        'coala/maintainers',
-        'coala/offtopic',
-        'coala/workshops',
-        'cobot',
-        'cobot-test',
-        'community',
-        'community',
-        'conferences',
-        'devops',
-        'documentation',
-        'editor-plugins',
-        'freelancers',
-        'performance',
+        # 'aspects',
+        # 'bearship',
+        # 'coala',
+        # 'coala/artwork-corner',
+        # 'coala/gsoc',
+        # 'coala/maintainers',
+        # 'coala/offtopic',
+        # 'coala/workshops',
+        # 'cobot',
+        # 'cobot-test',
+        # 'community',
+        # 'community',
+        # 'conferences',
+        # 'devops',
+        # 'documentation',
+        # 'editor-plugins',
+        # 'freelancers',
+        # 'performance',
     ]
 elif BACKEND == 'Zulip':
     ROOMS_TO_JOIN += [
