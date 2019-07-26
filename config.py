@@ -136,6 +136,7 @@ elif BACKEND == 'Zulip':
 
 if BACKEND == 'Gitter':
     ROOMS_TO_JOIN = ['coala/' + item for item in ROOMS_TO_JOIN]
+    ROOMS_TO_JOIN += ['codemute/cmbot']
 
 CHATROOM_PRESENCE = os.environ.get('ROOMS', '').split() or ROOMS_TO_JOIN
 
